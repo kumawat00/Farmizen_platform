@@ -1,0 +1,134 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
+/* BACKGROUND */
+.bg-container {
+  height: 110vh;
+  background: url('../assets1/agriculture_pic.jpg') no-repeat center center/cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LIGHT OVERLAY */
+.bg-container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4); /* light overlay */
+  top: 0;
+  left: 0;
+}
+
+/* CARD (COMMON FOR LOGIN + SIGNUP) */
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Bigger for signup */
+.auth-card-signup {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 30px 25px;
+  height: auto;              
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+/* INPUT GROUP */
+.input-group-custom {
+  display: flex;
+  align-items: center;
+  background: #eef5ee;
+  border-radius: 25px;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+}
+
+.input-group-custom input {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  font-size: 14px;
+}
+
+.icon {
+  color: #2e7d32;
+  margin-right: 10px;
+}
+.input-group-custom:focus-within {
+  box-shadow: 0 0 5px rgba(46,125,50,0.4);
+}
+
+.toggle {
+  color: #777;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.btn-auth {
+  width: 100%;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn-auth:hover {
+  background: #1b5e20;
+}
+/* GOOGLE BUTTON */
+.google-btn {
+  width: 100%;
+  border: none;
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 25px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* TEXT */
+.forgot {
+  font-size: 12px;
+  color: #777;
+  text-decoration: none;
+}
+
+.link {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.divider {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin: 15px 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .login-card {
+    padding: 20px;
+  }
+}
