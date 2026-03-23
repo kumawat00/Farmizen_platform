@@ -3,110 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forgot Password</title>
+  <title>Login</title>
 
-  <!-- Font -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- Your CSS -->
+  <!-- YOUR CSS -->
   <link rel="stylesheet" href="css/auth.css">
-
-  <style>
-    .step { display: none; }
-    .step.active { display: block; }
-
-    .otp-boxes {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .otp-boxes input {
-      width: 45px;
-      height: 45px;
-      text-align: center;
-      font-size: 18px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-  </style>
 </head>
 
 <body>
 
-<div class="bg-container d-flex justify-content-center align-items-center">
+<div class="bg-container">
 
   <div class="auth-card">
 
-    <!-- STEP 1 -->
-    <div id="step1" class="step active">
-      <h4 class="auth-title">Forgot Password</h4>
-      <p class="auth-subtitle">Enter Email OR Phone Number</p>
+    <h3 class="text-center mb-3">Welcome Back</h3>
+    <p class="text-center text-muted mb-4">Login to your account</p>
 
-      <!-- Email -->
-      <div class="input-group-custom">
-        <i class="fa-solid fa-envelope icon"></i>
-        <input type="email" id="email" placeholder="Email">
-      </div>
-
-      <!-- OR TEXT -->
-      <p class="text-center small text-muted">OR</p>
-
-      <!-- Phone -->
-      <div class="input-group-custom">
-        <i class="fa-solid fa-phone icon"></i>
-        <input type="text" id="phone" placeholder="Phone Number">
-      </div>
-
-      <button class="btn-auth" onclick="validateStep1()">Continue</button>
+    <!-- EMAIL -->
+    <div class="input-group-custom">
+      <i class="fa-solid fa-envelope icon"></i>
+      <input type="email" id="email" placeholder="Username or Email" required>
     </div>
 
-    <!-- STEP 2 -->
-    <div id="step2" class="step">
-      <h4 class="auth-title">Verify OTP</h4>
-      <p class="auth-subtitle">Enter the 4-digit code</p>
-
-      <div class="otp-boxes mb-3">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-        <input type="text" maxlength="1">
-      </div>
-
-      <button class="btn-auth" onclick="goToStep(3)">Verify</button>
+    <!-- PASSWORD -->
+    <div class="input-group-custom">
+      <i class="fa-solid fa-lock icon"></i>
+      <input type="password" id="password" placeholder="Password" required>
+      <i class="fa-solid fa-eye toggle" onclick="togglePassword('password', this)"></i>
     </div>
 
-    <!-- STEP 3 -->
-    <div id="step3" class="step">
-      <h4 class="auth-title">Reset Password</h4>
-      <p class="auth-subtitle">Enter your new password</p>
-
-      <!-- New Password -->
-      <div class="input-group-custom">
-        <i class="fa-solid fa-lock icon"></i>
-        <input type="password" id="newPassword" placeholder="New Password">
-        <i class="fa-solid fa-eye toggle" onclick="togglePassword('newPassword', this)"></i>
-      </div>
-
-      <!-- Confirm Password -->
-      <div class="input-group-custom">
-        <i class="fa-solid fa-lock icon"></i>
-        <input type="password" id="confirmPassword" placeholder="Confirm Password">
-        <i class="fa-solid fa-eye toggle" onclick="togglePassword('confirmPassword', this)"></i>
-      </div>
-
-      <button class="btn-auth" onclick="resetDone()">Reset Password</button>
+    <!-- FORGOT -->
+    <div class="text-end mb-2">
+      <a href="forgot-password.html" class="forgot">Forgot Password?</a>
     </div>
 
-    <!-- BACK -->
+    <!-- LOGIN BUTTON -->
+    <button class="btn-auth" onclick="loginUser()">Login</button>
+
+    <!-- DIVIDER -->
+    <div class="divider">or continue with</div>
+
+    <!-- GOOGLE -->
+    <button class="google-btn">
+      <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" width="18">
+      Sign in with Google
+    </button>
+
+    <!-- SIGNUP -->
     <p class="text-center mt-3 small">
-      <a href="login.html" class="link">Back to Login</a>
+      Don’t have an account? 
+      <a href="signup.html" class="link">Sign up</a>
     </p>
 
   </div>
@@ -116,29 +70,7 @@
 <!-- JS -->
 <script>
 
-  // STEP SWITCH
-  function goToStep(stepNumber) {
-    document.querySelectorAll(".step").forEach(step => {
-      step.classList.remove("active");
-    });
-
-    document.getElementById("step" + stepNumber).classList.add("active");
-  }
-
-  // STEP 1 VALIDATION (IMPORTANT 🔥)
-  function validateStep1() {
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-
-    if (!email && !phone) {
-      alert("Please enter Email OR Phone Number!");
-      return;
-    }
-
-    goToStep(2);
-  }
-
-  // TOGGLE PASSWORD
+  // SHOW / HIDE PASSWORD
   function togglePassword(fieldId, icon) {
     const field = document.getElementById(fieldId);
 
@@ -153,23 +85,33 @@
     }
   }
 
-  // FINAL
-  function resetDone() {
-    const pass = document.getElementById("newPassword").value;
-    const confirm = document.getElementById("confirmPassword").value;
+  // LOGIN VALIDATION (REALISTIC BASIC VALIDATION)
+  function loginUser() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    if (!pass || !confirm) {
-      alert("Fill all fields!");
+    // Empty check
+    if (!email || !password) {
+      alert("Please fill all fields!");
       return;
     }
 
-    if (pass !== confirm) {
-      alert("Passwords do not match!");
+    // Email format check
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+      alert("Enter a valid email!");
       return;
     }
 
-    alert("Password reset successful!");
-    window.location.href = "login.html";
+    // Password length check
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters!");
+      return;
+    }
+
+    // SUCCESS (redirect to dashboard)
+    alert("Login Successful!");
+    window.location.href = "dashboard.html";
   }
 
 </script>
